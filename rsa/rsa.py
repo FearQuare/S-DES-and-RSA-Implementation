@@ -100,13 +100,3 @@ def decrypt(private_key, ciphertext):
     d, n = private_key
     plaintext = ''.join([chr(pow(char, d, n)) for char in ciphertext])
     return plaintext
-
-
-# Example usage
-public_key, private_key = generate_rsa_keys(1024)
-message = "Hello, RSA!"
-ciphertext = encrypt(public_key, message)
-decrypted_message = decrypt(private_key, ciphertext)
-
-print(f"Original: {message}")
-print(f"Decrypted: {decrypted_message}")

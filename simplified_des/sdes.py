@@ -10,9 +10,9 @@ def P10(input_key):
 
 
 # Uncomment below to see "1010000010" is permuted to "1000001100"
-secret_key = "1010000010"
-permuted_key_10 = P10(secret_key)
-print("The result of the P10 when the input_key = 1010000010 |", permuted_key_10)
+# secret_key = "1010000010"
+# permuted_key_10 = P10(secret_key)
+# print("The result of the P10 when the input_key = 1010000010 |", permuted_key_10)
 
 
 def LS_1(key_half):
@@ -25,12 +25,12 @@ def LS_1(key_half):
 
 
 # Uncomment below to see "10000", "01100" -> "00001", "11000"
-first_half = permuted_key_10[:5]
-second_half = permuted_key_10[5:]
-print("\nFirst half of the key:", first_half, "\nSecond half of the key:", second_half)
-ls_first_half = LS_1(first_half)
-ls_second_half = LS_1(second_half)
-print("\nLeft shifted first half:", ls_first_half, "\nLeft shifted second half:", ls_second_half)
+# first_half = permuted_key_10[:5]
+# second_half = permuted_key_10[5:]
+# print("\nFirst half of the key:", first_half, "\nSecond half of the key:", second_half)
+# ls_first_half = LS_1(first_half)
+# ls_second_half = LS_1(second_half)
+# print("\nLeft shifted first half:", ls_first_half, "\nLeft shifted second half:", ls_second_half)
 
 
 def P8(key):
@@ -43,23 +43,23 @@ def P8(key):
     return ''.join(key[i - 1] for i in p8_perm)
 
 
-concatenated_halves = ls_first_half + ls_second_half
-key1 = P8(concatenated_halves)
-print("\n8 bit permutation of the concatenated left shifted halves is (aka key 1):", key1)
+# concatenated_halves = ls_first_half + ls_second_half
+# key1 = P8(concatenated_halves)
+# print("\n8 bit permutation of the concatenated left shifted halves is (aka key 1):", key1)
 
 # To produce key 2
-ls_first_left = LS_1(ls_first_half)
-ls_second_left = LS_1(ls_first_left)
+# ls_first_left = LS_1(ls_first_half)
+# ls_second_left = LS_1(ls_first_left)
 
-ls_first_right = LS_1(ls_second_half)
-ls_second_right = LS_1(ls_first_right)
+# ls_first_right = LS_1(ls_second_half)
+# ls_second_right = LS_1(ls_first_right)
 
-print("\nThe left shifted halves were '00001' and '11000'. After we left shifted them two times "
-      "more they are:", "\nFirst half:", ls_second_left, "\nSecond half:", ls_second_right)
+# print("\nThe left shifted halves were '00001' and '11000'. After we left shifted them two times "
+#       "more they are:", "\nFirst half:", ls_second_left, "\nSecond half:", ls_second_right)
 
-concatenated_halves_second = ls_second_left + ls_second_right
-key2 = P8(concatenated_halves_second)
-print("\nThe second key is:", key2)
+# concatenated_halves_second = ls_second_left + ls_second_right
+# key2 = P8(concatenated_halves_second)
+# print("\nThe second key is:", key2)
 
 
 # Now let's put them into a key generating function:
@@ -84,8 +84,8 @@ def generate_subkeys(master_key):
 
 
 # So this function must give the same output shown above
-print("\nSo the generate_subkeys function should return the same k1 and k2 displayed above:",
-      generate_subkeys("1010000010"))
+# print("\nSo the generate_subkeys function should return the same k1 and k2 displayed above:",
+#       generate_subkeys("1010000010"))
 
 
 # S-DES ENCRYPTION:
@@ -110,7 +110,7 @@ def inverse_IP(ciphertext):
 
 
 # Let's see if they are really the inverses of them by putting key 1:
-print("initial permutation:", IP("101001000"), "\ninverse permutation:", inverse_IP(IP("101001000")))
+# print("initial permutation:", IP("101001000"), "\ninverse permutation:", inverse_IP(IP("101001000")))
 
 
 def expand_and_permute(right_half):
