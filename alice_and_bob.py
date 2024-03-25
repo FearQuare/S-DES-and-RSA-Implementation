@@ -29,30 +29,32 @@ def encode_messages_to_binary(messages):
         binary_messages.append(binary_message)
     return binary_messages
 
-# Step 4: Secyre Communication
-messages_to_send = ["Hello Bob!", "How are you?", "I'm so tired because it's 3 am in the morning and I'm still writing this code :(."]
-messages_to_send = encode_messages_to_binary(messages_to_send)
-encrypted_messages = []
-decrypted_messages = []
+def alice_bob_communication():
+    # Step 4: Secyre Communication
+    messages_to_send = ["Hello Bob!", "How are you?",
+                        "I'm so tired because it's 3 am in the morning and I'm still writing this code :(."]
+    messages_to_send = encode_messages_to_binary(messages_to_send)
+    encrypted_messages = []
+    decrypted_messages = []
 
-print("Alice sends encrypted messages to Bob:")
-for message in messages_to_send:
-    # Alice encrypts messages using the S-DES key
-    encrypted_message = ''.join(sdes_encrypt(message, alice_sdes_key))
-    encrypted_messages.append(encrypted_message)
-    print(encrypted_message)
+    print("Alice sends encrypted messages to Bob:")
+    for message in messages_to_send:
+        # Alice encrypts messages using the S-DES key
+        encrypted_message = ''.join(sdes_encrypt(message, alice_sdes_key))
+        encrypted_messages.append(encrypted_message)
+        print(encrypted_message)
 
-print("\nBob receives and decrypts the messages:")
-for encrypted_message in encrypted_messages:
-    # Bob decrypts the messages using the S-DES key
-    decrypted_message = sdes_decrypt(encrypted_message, bob_decrypted_sdes_key)
-    decrypted_messages.append(decrypted_message)
+    print("\nBob receives and decrypts the messages:")
+    for encrypted_message in encrypted_messages:
+        # Bob decrypts the messages using the S-DES key
+        decrypted_message = sdes_decrypt(encrypted_message, bob_decrypted_sdes_key)
+        decrypted_messages.append(decrypted_message)
 
-    # Ensure the binary string has full 8-bit blocks and pad if necessary
-    padding = len(decrypted_message) % 8
-    if padding != 0:
-        decrypted_message = '0' * (8 - padding) + decrypted_message
+        # Ensure the binary string has full 8-bit blocks and pad if necessary
+        padding = len(decrypted_message) % 8
+        if padding != 0:
+            decrypted_message = '0' * (8 - padding) + decrypted_message
 
-    # Convert the binary string to ASCII text
-    ascii_text = ''.join(chr(int(decrypted_message[i:i + 8], 2)) for i in range(0, len(decrypted_message), 8))
-    print(ascii_text)
+        # Convert the binary string to ASCII text
+        ascii_text = ''.join(chr(int(decrypted_message[i:i + 8], 2)) for i in range(0, len(decrypted_message), 8))
+        print(ascii_text)

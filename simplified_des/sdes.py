@@ -1,4 +1,13 @@
+import random
 # S-DES KEY GENERATION:
+def generate_master_key():
+    """
+    Generates a random 10-bit master key for S-DES.
+    :return: A string representing a 10-bit binary key.
+    """
+    key = "".join(random.choice(["0", "1"]) for _ in range(10))
+    return key
+
 def P10(input_key):
     """
     Applies the P10 permutation to the input 10-bit key.
