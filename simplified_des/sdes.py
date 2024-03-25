@@ -234,6 +234,40 @@ def decrypt(ciphertext, key):
     return plaintext
 
 
+def encrypt_message(plaintext, key):
+    """
+    Encrypts plaintext of arbitrary length using the S-DES encryption algorithm.
+    Divides the plaintext into 8-bit blocks for encryption.
+    :param plaintext: The binary string plaintext.
+    :param key: The 10-bit binary string key.
+    :return: Concatenated binary string of ciphertext blocks.
+    """
+    # Ensure the plaintext length is a multiple of 8 bits, pad if necessary.
+    while len(plaintext) % 8 != 0:
+        plaintext += '0'
+
+    ciphertext = ''
+    for i in range(0, len(plaintext), 8):
+        block = plaintext[i:i + 8]
+        encrypted_block = encrypt(block, key)
+        ciphertext += encrypted_block
+    return ciphertext
+
+def decrypt_message(ciphertext, key):
+    """
+    Decrypts ciphertext that was encrypted in 8-bit blocks using the S-DES decryption algorithm.
+    :param ciphertext: The binary string ciphertext.
+    :param key: The 10-bit binary string key.
+    :return: Concatenated binary string of decrypted plaintext blocks.
+    """
+    plaintext = ''
+    for i in range(0, len(ciphertext), 8):
+        block = ciphertext[i:i+8]
+        decrypted_block = decrypt(block, key)
+        plaintext += decrypted_block
+    return plaintext
+
+
 # Example usage for both encryption and decryption
 if __name__ == "__main__":
     plaintext = "10111101"  # Example 8-bit plaintext
